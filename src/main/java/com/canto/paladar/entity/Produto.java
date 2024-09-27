@@ -21,8 +21,13 @@ public class Produto {
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
+
+    @Column(unique = true)
     private String nome;
+
+    @Column(unique = true)
     private String descricao;
+
     private Double preco;
 
     @ManyToMany(cascade = ALL)
