@@ -1,4 +1,4 @@
-package com.canto.paladar.dto;
+package com.canto.paladar.dto.pessoa;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

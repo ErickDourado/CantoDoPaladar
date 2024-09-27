@@ -1,4 +1,4 @@
-package com.canto.paladar.dto;
+package com.canto.paladar.dto.pessoa;
 
 import java.io.Serial;
 import java.io.Serializable;

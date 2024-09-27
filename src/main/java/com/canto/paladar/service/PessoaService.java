@@ -1,7 +1,7 @@
 package com.canto.paladar.service;
 
-import com.canto.paladar.dto.PessoaRequest;
-import com.canto.paladar.dto.PessoaResponse;
+import com.canto.paladar.dto.pessoa.PessoaRequest;
+import com.canto.paladar.dto.pessoa.PessoaResponse;
 import com.canto.paladar.entity.Pessoa;
 import com.canto.paladar.exception.ResourceNotFoundException;
 import com.canto.paladar.mapper.PessoaMapper;

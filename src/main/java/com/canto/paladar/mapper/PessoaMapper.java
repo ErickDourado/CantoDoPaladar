@@ -1,7 +1,7 @@
 package com.canto.paladar.mapper;
 
-import com.canto.paladar.dto.PessoaRequest;
-import com.canto.paladar.dto.PessoaResponse;
+import com.canto.paladar.dto.pessoa.PessoaRequest;
+import com.canto.paladar.dto.pessoa.PessoaResponse;
 import com.canto.paladar.entity.Pessoa;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;

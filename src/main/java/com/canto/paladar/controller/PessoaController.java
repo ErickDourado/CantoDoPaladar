@@ -1,7 +1,7 @@
 package com.canto.paladar.controller;
 
-import com.canto.paladar.dto.PessoaRequest;
-import com.canto.paladar.dto.PessoaResponse;
+import com.canto.paladar.dto.pessoa.PessoaRequest;
+import com.canto.paladar.dto.pessoa.PessoaResponse;
 import com.canto.paladar.service.PessoaService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
