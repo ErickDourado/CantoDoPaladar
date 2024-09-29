@@ -51,7 +51,7 @@ public class EnderecoService {
         Pessoa pessoaEntity = pessoaService.find(pessoaId);
         log.info("Buscando todos os endereços da pessoa {}", pessoaMapper.toResponse(pessoaEntity));
         List<Endereco> enderecoEntities = pessoaEntity.getEnderecos();
-        return enderecoMapper.toResponseSet(enderecoEntities);
+        return enderecoMapper.toResponseList(enderecoEntities);
     }
 
     @Transactional

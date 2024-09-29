@@ -24,6 +24,6 @@ public interface EnderecoMapper {
 
     EnderecoResponse toResponse(Endereco entity);
 
-    List<EnderecoResponse> toResponseSet(List<Endereco> entities);
+    List<EnderecoResponse> toResponseList(List<Endereco> entities);
 
 }
