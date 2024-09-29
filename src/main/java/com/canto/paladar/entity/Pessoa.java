@@ -1,17 +1,19 @@
 package com.canto.paladar.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static jakarta.persistence.CascadeType.ALL;
 import static jakarta.persistence.GenerationType.IDENTITY;
 
-@Data
+@Getter
+@Setter
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -37,7 +39,12 @@ public class Pessoa {
     @OneToMany(mappedBy = "pessoa", cascade = ALL)
     private List<Pedido> pedidos = new ArrayList<>();
 
-    @ManyToMany(mappedBy = "pessoas", cascade = ALL)
-    private List<Endereco> enderecos = new ArrayList<>();
+    @ManyToMany(cascade = ALL)
+    @JoinTable(
+            name = "tb_pessoa_endereco",
+            joinColumns = @JoinColumn(name = "pessoa_id"),
+            inverseJoinColumns = @JoinColumn(name = "endereco_id")
+    )
+    private Set<Endereco> enderecos = new HashSet<>();
 
 }

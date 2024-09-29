@@ -1,17 +1,16 @@
 package com.canto.paladar.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
-import static jakarta.persistence.CascadeType.ALL;
 import static jakarta.persistence.GenerationType.IDENTITY;
 
-@Data
+@Getter
+@Setter
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -25,10 +24,10 @@ public class Pedido {
     private Double frete;
     private Double total;
 
-    @ManyToOne(cascade = ALL)
+    @ManyToOne
     private Pessoa pessoa;
 
-    @ManyToMany(mappedBy = "pedidos", cascade = ALL)
-    private List<Produto> produtos = new ArrayList<>();
+    @ManyToMany(mappedBy = "pedidos")
+    private Set<Produto> produtos = new HashSet<>();
 
 }
