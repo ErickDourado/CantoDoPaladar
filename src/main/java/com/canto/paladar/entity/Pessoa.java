@@ -4,9 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import static jakarta.persistence.CascadeType.ALL;
 import static jakarta.persistence.GenerationType.IDENTITY;
@@ -39,12 +37,7 @@ public class Pessoa {
     @OneToMany(mappedBy = "pessoa", cascade = ALL)
     private List<Pedido> pedidos = new ArrayList<>();
 
-    @ManyToMany(cascade = ALL)
-    @JoinTable(
-            name = "tb_pessoa_endereco",
-            joinColumns = @JoinColumn(name = "pessoa_id"),
-            inverseJoinColumns = @JoinColumn(name = "endereco_id")
-    )
-    private Set<Endereco> enderecos = new HashSet<>();
+    @OneToMany(mappedBy = "pessoa", cascade = ALL)
+    private List<Endereco> enderecos = new ArrayList<>();
 
 }

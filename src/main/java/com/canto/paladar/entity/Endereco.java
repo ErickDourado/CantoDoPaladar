@@ -3,9 +3,6 @@ package com.canto.paladar.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import static jakarta.persistence.GenerationType.IDENTITY;
 
 @Getter
@@ -28,7 +25,7 @@ public class Endereco {
     private String cidade;
     private String uf;
 
-    @ManyToMany(mappedBy = "enderecos")
-    private Set<Pessoa> pessoas = new HashSet<>();
+    @ManyToOne
+    private Pessoa pessoa;
 
 }
