@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Objects;
@@ -22,6 +23,7 @@ public class PessoaService {
     private final PessoaRepository pessoaRepository;
     private final PessoaMapper mapper;
 
+    @Transactional
     public PessoaResponse save(PessoaRequest request) {
         log.info("Salvando pessoa: {}", request);
         verifyIfEmailOrCellPhoneAlreadyExists(request, null);
@@ -31,20 +33,20 @@ public class PessoaService {
         return response;
     }
 
+    @Transactional(readOnly = true)
     public PessoaResponse findById(Long id) {
-        log.info("Buscando pessoa pelo id: {}", id);
         Pessoa entity = find(id);
-        PessoaResponse response = mapper.toResponse(entity);
-        log.info("Pessoa encontrada: {}", response);
-        return response;
+        return mapper.toResponse(entity);
     }
 
+    @Transactional(readOnly = true)
     public List<PessoaResponse> findAll() {
         log.info("Buscando todas as pessoas");
         List<Pessoa> entities = pessoaRepository.findAll();
         return mapper.toResponseList(entities);
     }
 
+    @Transactional
     public PessoaResponse update(Long id, PessoaRequest request) {
         verifyIfEmailOrCellPhoneAlreadyExists(request, id);
         Pessoa entity = find(id);
@@ -54,18 +56,25 @@ public class PessoaService {
         return response;
     }
 
+    @Transactional
     public void delete(Long id) {
-        log.info("Deletando pessoa pelo id: {}", id);
         PessoaResponse response = mapper.toResponse(find(id));
+        log.info("Deletando pessoa pelo id: {}", id);
         pessoaRepository.deleteById(id);
         log.info("Pessoa deletada com sucesso: {}", response);
     }
 
-    private Pessoa find(Long id) {
-        return pessoaRepository.findById(id).orElseThrow(() -> {
-            log.info("Pessoa não encontrada pelo id: {}", id);
-            return new ResourceNotFoundException("Pessoa não encontrada pelo id: " + id);
-        });
+    public Pessoa find(Long id) {
+        log.info("Buscando pessoa pelo id: {}", id);
+        return pessoaRepository.findById(id)
+                .map(pessoa -> {
+                    log.info("Pessoa encontrada: {}", mapper.toResponse(pessoa));
+                    return pessoa;
+                })
+                .orElseThrow(() -> {
+                    log.info("Pessoa não encontrada pelo id: {}", id);
+                    return new ResourceNotFoundException("Pessoa não encontrada pelo id: " + id);
+                });
     }
 
     private void verifyIfEmailOrCellPhoneAlreadyExists(PessoaRequest request, Long id) {
