@@ -3,6 +3,10 @@ package com.canto.paladar.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import static jakarta.persistence.CascadeType.ALL;
 import static jakarta.persistence.GenerationType.IDENTITY;
 
 @Getter
@@ -27,5 +31,8 @@ public class Endereco {
 
     @ManyToOne
     private Pessoa pessoa;
+
+    @OneToMany(mappedBy = "endereco", cascade = ALL)
+    private List<Pedido> pedidos = new ArrayList<>();
 
 }

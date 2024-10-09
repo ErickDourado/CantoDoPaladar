@@ -11,6 +11,7 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 @Getter
 @Setter
 @ToString
+@With
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -26,6 +27,9 @@ public class Pedido {
 
     @ManyToOne
     private Pessoa pessoa;
+
+    @ManyToOne
+    private Endereco endereco;
 
     @ManyToMany(mappedBy = "pedidos")
     private Set<Produto> produtos = new HashSet<>();
