@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static jakarta.persistence.CascadeType.ALL;
+import static jakarta.persistence.FetchType.LAZY;
 import static jakarta.persistence.GenerationType.IDENTITY;
 
 @Getter
@@ -29,7 +30,7 @@ public class Endereco {
     private String cidade;
     private String uf;
 
-    @ManyToOne
+    @ManyToOne(fetch = LAZY)
     private Pessoa pessoa;
 
     @OneToMany(mappedBy = "endereco", cascade = ALL)

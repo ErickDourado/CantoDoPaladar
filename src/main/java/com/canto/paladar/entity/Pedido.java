@@ -6,6 +6,7 @@ import lombok.*;
 import java.util.HashSet;
 import java.util.Set;
 
+import static jakarta.persistence.FetchType.LAZY;
 import static jakarta.persistence.GenerationType.IDENTITY;
 
 @Getter
@@ -25,10 +26,10 @@ public class Pedido {
     private Double frete;
     private Double total;
 
-    @ManyToOne
+    @ManyToOne(fetch = LAZY)
     private Pessoa pessoa;
 
-    @ManyToOne
+    @ManyToOne(fetch = LAZY)
     private Endereco endereco;
 
     @ManyToMany(mappedBy = "pedidos")
