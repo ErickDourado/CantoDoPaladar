@@ -20,29 +20,29 @@ public class EnderecoController {
     private final EnderecoService enderecoService;
 
     @PostMapping("/{pessoaId}")
-    public ResponseEntity<EnderecoResponse> save(@PathVariable final Long pessoaId,
+    public ResponseEntity<EnderecoResponse> save(@PathVariable("pessoaId") final Long pessoaId,
                                                  @RequestBody @Valid final EnderecoRequest request) {
         return ResponseEntity.status(CREATED).body(enderecoService.save(request, pessoaId));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<EnderecoResponse> findById(@PathVariable final Long id) {
+    public ResponseEntity<EnderecoResponse> findById(@PathVariable("id") final Long id) {
         return ResponseEntity.ok(enderecoService.findById(id));
     }
 
     @GetMapping("/pessoa/{pessoaId}")
-    public ResponseEntity<List<EnderecoResponse>> findAllByPessoa(@PathVariable final Long pessoaId) {
+    public ResponseEntity<List<EnderecoResponse>> findAllByPessoa(@PathVariable("pessoaId") final Long pessoaId) {
         return ResponseEntity.ok(enderecoService.findAllByPessoa(pessoaId));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<EnderecoResponse> update(@PathVariable final Long id,
+    public ResponseEntity<EnderecoResponse> update(@PathVariable("id") final Long id,
                                                    @RequestBody @Valid final EnderecoRequest request) {
         return ResponseEntity.ok(enderecoService.update(id, request));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable final Long id) {
+    public ResponseEntity<Void> delete(@PathVariable("id") final Long id) {
         enderecoService.delete(id);
         return ResponseEntity.noContent().build();
     }
