@@ -19,30 +19,30 @@ public class PedidoController {
 
     private final PedidoService pedidoService;
 
-    @PostMapping("/{pedidoId}")
-    public ResponseEntity<PedidoResponse> save(@PathVariable final Long pedidoId,
+    @PostMapping("/{pessoaId}")
+    public ResponseEntity<PedidoResponse> save(@PathVariable("pessoaId") final Long pessoaId,
                                                @RequestBody @Valid final PedidoRequest request) {
-        return ResponseEntity.status(CREATED).body(pedidoService.save(request, pedidoId));
+        return ResponseEntity.status(CREATED).body(pedidoService.save(request, pessoaId));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<PedidoResponse> findById(@PathVariable final Long id) {
+    public ResponseEntity<PedidoResponse> findById(@PathVariable("id") final Long id) {
         return ResponseEntity.ok(pedidoService.findById(id));
     }
 
-    @GetMapping("/pessoa/{pedidoId}")
-    public ResponseEntity<List<PedidoResponse>> findAllByPessoa(@PathVariable final Long pedidoId) {
-        return ResponseEntity.ok(pedidoService.findAllByPessoa(pedidoId));
+    @GetMapping("/pessoa/{pessoaId}")
+    public ResponseEntity<List<PedidoResponse>> findAllByPessoa(@PathVariable("pessoaId") final Long pessoaId) {
+        return ResponseEntity.ok(pedidoService.findAllByPessoa(pessoaId));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<PedidoResponse> update(@PathVariable final Long id,
+    public ResponseEntity<PedidoResponse> update(@PathVariable("id") final Long id,
                                                  @RequestBody @Valid final PedidoRequest request) {
         return ResponseEntity.ok(pedidoService.update(id, request));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable final Long id) {
+    public ResponseEntity<Void> delete(@PathVariable("id") final Long id) {
         pedidoService.delete(id);
         return ResponseEntity.noContent().build();
     }

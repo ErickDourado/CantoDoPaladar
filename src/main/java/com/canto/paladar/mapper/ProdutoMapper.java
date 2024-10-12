@@ -7,6 +7,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
 
 import java.util.List;
+import java.util.Set;
 
 import static org.mapstruct.NullValueCheckStrategy.ALWAYS;
 import static org.mapstruct.NullValuePropertyMappingStrategy.IGNORE;
@@ -25,5 +26,7 @@ public interface ProdutoMapper {
     ProdutoResponse toResponse(Produto entity);
 
     List<ProdutoResponse> toResponseList(List<Produto> entities);
+
+    Set<ProdutoResponse> toResponseSet(Set<Produto> entities);
 
 }
