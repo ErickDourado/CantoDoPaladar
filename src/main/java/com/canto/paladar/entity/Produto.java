@@ -24,6 +24,9 @@ public class Produto {
     @Column(unique = true)
     private String nome;
 
+    @Column(columnDefinition = "TEXT")
+    private String foto;
+
     @Column(unique = true)
     private String descricao;
 

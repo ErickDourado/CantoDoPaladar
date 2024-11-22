@@ -6,6 +6,7 @@ import java.io.Serializable;
 public record ProdutoResponse(
         Long id,
         String nome,
+        String foto,
         String descricao,
         Double preco
 ) implements Serializable {

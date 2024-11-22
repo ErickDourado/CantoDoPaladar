@@ -13,6 +13,10 @@ public record ProdutoRequest(
         @Size(message = "Nome deve conter entre 5 e 30 caracteres", min = 5, max = 30)
         String nome,
 
+        @NotBlank(message = "Foto não pode ser vazio")
+        @Size(message = "Foto deve conter mais de 5 caracteres", min = 5)
+        String foto,
+
         @NotBlank(message = "Descrição não pode ser vazia")
         @Size(message = "Descrição deve conter entre 10 e 80 caracteres", min = 6, max = 50)
         String descricao,
