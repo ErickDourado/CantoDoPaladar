@@ -1,5 +1,7 @@
 package com.canto.paladar.dto.produto;
 
+import com.canto.paladar.enums.Categoria;
+
 import java.io.Serial;
 import java.io.Serializable;
 
@@ -8,7 +10,8 @@ public record ProdutoResponse(
         String nome,
         String foto,
         String descricao,
-        Double preco
+        Double preco,
+        Categoria categoria
 ) implements Serializable {
 
     @Serial

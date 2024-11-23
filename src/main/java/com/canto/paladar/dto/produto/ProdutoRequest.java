@@ -1,5 +1,6 @@
 package com.canto.paladar.dto.produto;
 
+import com.canto.paladar.enums.Categoria;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;
@@ -23,7 +24,9 @@ public record ProdutoRequest(
 
         @PositiveOrZero(message = "Preço não pode ser negativo")
         @NotNull(message = "Preço não pode ser nulo")
-        Double preco
+        Double preco,
+
+        Categoria categoria
 ) implements Serializable {
 
     @Serial

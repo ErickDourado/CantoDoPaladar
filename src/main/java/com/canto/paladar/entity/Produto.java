@@ -1,5 +1,6 @@
 package com.canto.paladar.entity;
 
+import com.canto.paladar.enums.Categoria;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -31,6 +32,9 @@ public class Produto {
     private String descricao;
 
     private Double preco;
+
+    @Enumerated(EnumType.STRING)
+    private Categoria categoria;
 
     @ManyToMany
     @JoinTable(
