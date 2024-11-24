@@ -25,7 +25,7 @@ public class Produto {
     @Column(unique = true)
     private String nome;
 
-    @Column(columnDefinition = "TEXT")
+    @Column(columnDefinition = "LONGBLOB")
     private String foto;
 
     @Column(unique = true)
