@@ -24,7 +24,7 @@ public class ProdutoService {
 
     public ProdutoResponse save(ProdutoRequest request) {
         log.info("Salvando produto: {}", request);
-        verifyIfNameOrDescriptionAlreadyExists(request, null);
+        verifyIfNameAlreadyExists(request, null);
         Produto entity = produtoRepository.save(mapper.toEntity(request));
         ProdutoResponse response = mapper.toResponse(entity);
         log.info("Produto salvo com sucesso: {}", response);
@@ -46,7 +46,7 @@ public class ProdutoService {
     }
 
     public ProdutoResponse update(Long id, ProdutoRequest request) {
-        verifyIfNameOrDescriptionAlreadyExists(request, id);
+        verifyIfNameAlreadyExists(request, id);
         Produto entity = find(id);
         log.info("Atualizando produto pelo id: {}, dados antigos {}, dados novos: {}", id, mapper.toResponse(entity), request);
         ProdutoResponse response = mapper.toResponse(produtoRepository.save(mapper.toEntity(request, entity)));
@@ -68,23 +68,18 @@ public class ProdutoService {
         });
     }
 
-    private void verifyIfNameOrDescriptionAlreadyExists(ProdutoRequest request, Long id) {
+    private void verifyIfNameAlreadyExists(ProdutoRequest request, Long id) {
         if (Objects.isNull(id))
-            log.info("Validando nome e descrição do produto antes de cadastrar os dados.");
+            log.info("Validando nome do produto antes de cadastrar os dados.");
         else
-            log.info("Validando nome e descrição do produto antes de atualizar os dados.");
+            log.info("Validando nome do produto antes de atualizar os dados.");
 
         produtoRepository.findByNome(request.nome())
                 .filter(produto -> !produto.getId().equals(id))
-                .ifPresentOrElse(produto -> {
+                .ifPresent(produto -> {
                     log.info("Nome \"{}\" já existe!", produto.getNome());
                     throw new DataIntegrityViolationException("Nome \""+ produto.getNome() +"\" já existe!");
-                }, () -> produtoRepository.findByDescricao(request.descricao())
-                        .filter(produto -> !produto.getId().equals(id))
-                        .ifPresent(produto -> {
-                            log.info("Descrição \"{}\" já existe!", produto.getDescricao());
-                            throw new DataIntegrityViolationException("Descrição \""+ produto.getDescricao() +"\" já existe!");
-                        }));
+                });
     }
 
 }

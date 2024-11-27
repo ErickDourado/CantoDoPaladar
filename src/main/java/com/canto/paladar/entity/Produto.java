@@ -28,7 +28,6 @@ public class Produto {
     @Column(columnDefinition = "LONGBLOB")
     private String foto;
 
-    @Column(unique = true)
     private String descricao;
 
     private Double preco;
